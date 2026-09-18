@@ -1,4 +1,4 @@
-#Calculadora de Mol
+# Calculadora de Mol
 
 Este é um projeto realizado por diversão e para estudo da linguagem Batch.
 
@@ -8,7 +8,7 @@ Este é um projeto realizado por diversão e para estudo da linguagem Batch.
 
 Git 
 
-##Como usar?
+## Como usar?
 
 No seu terminal do windows, faça a seguinte sequencia de comandos:
 
@@ -18,7 +18,7 @@ git clone <url>
 mol.bat
 ```
 
-##Status
+## Status
 
 ```
 Em desenvolvimento...
