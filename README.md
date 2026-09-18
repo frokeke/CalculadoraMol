@@ -4,9 +4,11 @@ Este é um projeto realizado por diversão e para estudo da linguagem Batch.
 
 É um programa simples que tem como intuitos iniciais servir como calculadora de mol e massa molar.
 
-###Ferramentas necessarias:
+### Ferramentas necessarias:
 
+```
 Git 
+```
 
 ## Como usar?
 
