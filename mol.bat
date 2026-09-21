@@ -18,10 +18,67 @@ for %%E in (%elemTab%) do (
 
 ::Visualização do usuario
 
-echo Teste
-echo Li = !tabPeri[3]!
+set /p "formula=Digite uma formula quimica: "
+
+set /a pos=0
+
+:formula_parse
+
+set "c1=!formula:~%pos%,1!"
+
+if "!c1!"=="" goto fim_formula
+
+set /a prox=pos+1
+set "c2=!formula:~%prox%,1!"
+
+set "simbolo="
+
+if not "!c2!"=="" (
+    for %%E in (%elemTab%) do (
+        if "%%E"=="!c1!!c2!" (
+            set "simbolo=%%E"
+        )
+    )
+)
+if not defined simbolo (
+    for %%E in (%elemTab%) do (
+        if "%%E"=="!c1!" (
+            set "simbolo=%%E"
+        )
+    )
+)
+
+if defined simbolo (
+
+    set /a indice=!numAtomico[!simbolo!]!
+    set /a numeroAtomico=indice+1
+
+    echo Elemento: !simbolo! ^| Numero atomico: !numeroAtomico!
+
+    if "!c2!"=="" (
+        set /a pos+=1
+    ) else (
+        for %%E in (%elemTab%) do (
+            if "%%E"=="!c1!!c2!" (
+                set /a pos+=2
+                goto formula_parse
+            )
+        )
+        set /a pos+=1
+    )
+) else (
+    echo Quantidade: !c1!
+    set /a pos+=1
+)
+
+goto formula_parse
+
+
+:fim_formula
 
 powershell -Command "[math]::Round(!tabPeri[0]! + !tabPeri[1]!, 4)"
+
+
 
 pause
 cls
