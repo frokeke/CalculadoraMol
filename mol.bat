@@ -78,8 +78,5 @@ goto formula_parse
 
 powershell -Command "[math]::Round(!tabPeri[0]! + !tabPeri[1]!, 4)"
 
-
-
 pause
 cls
-
