@@ -1,7 +1,7 @@
 @echo off
 setlocal EnableDelayedExpansion
 
-call teste.bat
+call periTab.bat
 
 ::Criacao de uma pseudo-lista para os elementos da tabela(para facilitar a população do pseudo-array)
 
