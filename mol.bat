@@ -92,7 +92,7 @@ for %%E in (%elemTab%) do (
 
 echo.
 echo ----------------------------------------------
-echo Massa Molar: !massaMolar!
+echo Massa Molar: !massaMolar! g/mol
 echo ----------------------------------------------
 echo.
 
