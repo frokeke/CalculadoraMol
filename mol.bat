@@ -17,7 +17,7 @@ for %%E in (%elemTab%) do (
     set "qtd[%%E]=0"
 )
 
-::Intro
+:: Intro
 echo.
 echo ==============================================
 echo       CALCULADORA DE MASSA MOLAR E MOL
@@ -69,9 +69,11 @@ if defined resto (
 
 echo.
 echo ==============================================
-echo       	      RESULTADO
+echo                  RESULTADOS
 echo ==============================================
 echo.
+
+set /a massaMolar=0
 
 for %%E in (%elemTab%) do (
 
@@ -82,39 +84,46 @@ for %%E in (%elemTab%) do (
         ) else (
             echo Elemento %%E ^| Numero atomico: !numAtomico[%%E]! ^| Quantidade: !qtd[%%E]!
         )
+
+        :: Numero Atomico * Quantidade
+        set /a "massaMolar+=!numAtomico[%%E]!*!qtd[%%E]!"
     )
 )
 
 echo.
+echo ----------------------------------------------
+echo Massa Molar: !massaMolar!
+echo ----------------------------------------------
+echo.
+
 pause
 cls
 exit /b
 
-::Tratamento de um grupo quimico
+
+:: Tratamento de um grupo quimico
 :grupo
 
 set /a multiplicador=%1
 
 :grupo_loop
 
-:: Se acabou o texto, termina
 if not defined resto exit /b
 
-:: Primeiro caractere
 set "c1=!resto:~0,1!"
 
-:: Se encontrou fechamento, retorna para quem abriu
 if "!c1!"==")" exit /b
 
-::Abre grupo
+:: Abre grupo
 if "!c1!"=="(" goto abrir_grupo
 
 goto ler_elemento
 
-::Func para abrir grupo
+
+:: Func para abrir grupo
 :abrir_grupo
 
-::Remove "("
+:: Remove "("
 set "resto=!resto:~1!"
 
 :: Guarda quantidades antes do grupo
@@ -122,7 +131,7 @@ for %%E in (%elemTab%) do (
     set "qtdAntes[%%E]=!qtd[%%E]!"
 )
 
-::Processa conteúdo
+:: Processa conteúdo
 call :grupo 1
 
 if defined erro exit /b
@@ -159,6 +168,7 @@ for %%E in (%elemTab%) do (
 )
 
 goto grupo_loop
+
 
 :ler_elemento
 
@@ -203,10 +213,11 @@ call :ler_numero
 
 if not defined numero set "numero=1"
 
-::Adiciona um elemento
+:: Adiciona um elemento
 set /a "qtd[%simbolo%]=qtd[%simbolo%]+numero*multiplicador"
 
 goto grupo_loop
+
 
 :ler_numero
 
